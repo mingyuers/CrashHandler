@@ -54,10 +54,11 @@ public class CrashHandler implements UncaughtExceptionHandler {
         mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
     }
 
+
     /**
      * 初始化
      *
-     * @param builder
+     * @param builder build构造器
      */
     public static void init(Builder builder) {
         instance = new CrashHandler(builder);
@@ -112,8 +113,6 @@ public class CrashHandler implements UncaughtExceptionHandler {
 
     /**
      * 收集设备参数信息
-     *
-     * @param ctx
      */
     public void collectDeviceInfo(Context ctx) {
         try {
@@ -190,6 +189,10 @@ public class CrashHandler implements UncaughtExceptionHandler {
 
         public Builder setCrashTips(String s) {
             this.crashTips = s;
+            return this;
+        }
+
+        public Builder build(){
             return this;
         }
     }

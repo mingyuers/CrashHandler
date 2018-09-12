@@ -28,5 +28,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation project(':crashhandler')
 
-    compile 'com.mylhyl:acp:1.2.0'
+    implementation 'com.mylhyl:acp:1.2.0'
 }

@@ -1,4 +1,16 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
+
+publish {
+    userOrg = 'mingyuers'//bintray.com用户名
+    groupId = 'com.fangm'//jcenter上的路径
+    artifactId = 'crashhandler'//项目名称
+    publishVersion = '1.0.2'//版本号
+    desc = 'crashhandler'//描述，不重要
+    website = 'https://github.com/mingyuers/CrashHandler'//网站，最好有，不重要
+    licences = ['MIT']
+}
+
 
 android {
     compileSdkVersion 27
@@ -22,6 +34,40 @@ android {
         }
     }
 
+    lintOptions {
+        abortOnError false
+    }
+
+}
+
+tasks.withType(Javadoc) {
+    options{
+        encoding "UTF-8"
+        charSet 'UTF-8'
+        links "http://docs.oracle.com/javase/7/docs/api"
+    }
+}
+
+// 生成jar包的task，不需要修改。
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+// 生成jarDoc的task，不需要修改。
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    // destinationDir = file("../javadoc/")
+    failOnError false // 忽略注释语法错误，如果用jdk1.8你的注释写的不规范就编译不过。
+}
+// 生成javaDoc的jar，不需要修改。
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+artifacts {
+    archives javadocJar
+    archives sourcesJar
 }
 
 dependencies {
