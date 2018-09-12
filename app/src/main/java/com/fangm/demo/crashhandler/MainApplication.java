@@ -10,10 +10,10 @@ public class MainApplication extends Application {
     public void onCreate() {
         super.onCreate();
         CrashHandler.init(new CrashHandler.Builder(this));
-        CrashHandler.init(new CrashHandler.Builder(this)
-                .setCrashLogService(new CrashLogServiceImpl())
-                .setCrashTips("很抱歉,程序出现异常,即将退出")
-                .build()
-        );
+//        CrashHandler.init(new CrashHandler.Builder(this)
+//                .setCrashLogService(new CrashLogServiceImpl())
+//                .setCrashTips("很抱歉,程序出现异常,即将退出")
+//                .build()
+//        );
     }
 }
